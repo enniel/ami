@@ -14,6 +14,10 @@ class AmiAction extends AmiAbstract
      * @var string
      */
     protected $signature = 'ami:action
+                                {--host= : Asterisk ami host}
+                                {--port= : Asterisk ami port}
+                                {--username= : Asterisk ami username}
+                                {--secret= : Asterisk ami secret key}
                                 {action : Action name}
                                 {--arguments=* : Arguments for ami action}
                             ';
