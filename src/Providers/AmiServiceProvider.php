@@ -55,7 +55,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerAmiListen()
     {
         $this->app->singleton('command.ami.listen', function ($app) {
-            return new AmiListen($app->make('ami.eventloop'), $app->make('ami.connector'));
+            return new AmiListen($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
         });
         $this->commands('command.ami.listen');
     }

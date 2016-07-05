@@ -20,22 +20,36 @@ abstract class AmiAbstract extends Command
 
     protected $events;
 
-    public function __construct(LoopInterface $loop, Factory $connector)
+    protected $config;
+
+    public function __construct(LoopInterface $loop, Factory $connector, array $config = [])
     {
         parent::__construct();
         $this->loop = $loop;
         $this->connector = $connector;
+        $this->config = $config;
     }
 
     public function uri()
     {
-        extract($this->option());
-        $host = isset($host) ? $host : config('ami.host');
-        $port = isset($port) ? $port : config('ami.port');
-        $username = isset($username) ? $username : config('ami.username');
-        $secret = isset($secret) ? $secret : config('ami.secret');
-
-        return "tcp://{$username}:{$secret}@{$host}:{$port}";
+        $options = $this->option();
+        $options = is_array($options) ? $options : [];
+        foreach ($options as $key => $value) {
+            if(!in_array($key, ['host', 'port', 'username', 'secret']) || empty($value)) {
+                unset($options[$key]);
+            }
+        }
+        $options = array_merge($this->config, $options);
+        extract($options);
+        $host = isset($host) ? $host : '127.0.0.1';
+        $port = isset($port) ? $port : 5038;
+        $username = isset($username) ? $username : null;
+        $secret = isset($secret) ? $secret : null;
+        $auth = '';
+        if($username && $secret) {
+            $auth = "{$username}:{$secret}@";
+        }
+        return "tcp://{$auth}{$host}:{$port}";
     }
 
     /**
