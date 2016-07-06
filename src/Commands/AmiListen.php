@@ -43,7 +43,7 @@ class AmiListen extends AmiAbstract
     public function listeners(Event $event)
     {
         $event = $event->getName();
-        $listeners = config('ami.listeners', []);
+        $listeners = array_get($this->config, 'listeners', []);
 
         return isset($listeners[$event]) ? $listeners[$event] : [];
     }
