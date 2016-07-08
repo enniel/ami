@@ -16,6 +16,28 @@ use Clue\React\Ami\Factory;
 class AmiServiceProvider extends ServiceProvider
 {
     /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
+    /**
+     * Deferred providers.
+     *
+     * @var array
+     */
+    protected $providers = [
+        'command.ami.listen',
+        'command.ami.cli',
+        'command.ami.action',
+        'command.ami.dongle.sms',
+        'command.ami.dongle.ussd',
+        'ami.eventloop',
+        'ami.connector',
+    ];
+
+    /**
      * Perform post-registration booting of services.
      */
     public function boot()
@@ -32,6 +54,7 @@ class AmiServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+        $this->registerEvents();
         $this->registerEventLoop();
         $this->registerConnector();
         $this->registerAmiListen();
@@ -66,7 +89,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerAmiCli()
     {
         $this->app->singleton('command.ami.cli', function ($app) {
-            return new AmiCli($app->make('ami.eventloop'), $app->make('ami.connector'));
+            return new AmiCli($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
         });
         $this->commands('command.ami.cli');
     }
@@ -77,7 +100,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerAmiAction()
     {
         $this->app->singleton('command.ami.action', function ($app) {
-            return new AmiAction($app->make('ami.eventloop'), $app->make('ami.connector'));
+            return new AmiAction($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
         });
         $this->commands('command.ami.action');
     }
@@ -88,7 +111,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerDongleSms()
     {
         $this->app->singleton('command.ami.dongle.sms', function ($app) {
-            return new AmiSms($app->make('ami.eventloop'), $app->make('ami.connector'));
+            return new AmiSms($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
         });
         $this->commands('command.ami.dongle.sms');
     }
@@ -99,7 +122,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerDongleUssd()
     {
         $this->app->singleton('command.ami.dongle.ussd', function ($app) {
-            return new AmiUssd($app->make('ami.eventloop'), $app->make('ami.connector'));
+            return new AmiUssd($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
         });
         $this->commands('command.ami.dongle.ussd');
     }
@@ -126,20 +149,29 @@ class AmiServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register events.
+     */
+    protected function registerEvents()
+    {
+        $config = config('ami');
+        $emitter = array_get($config, 'classes.event', \Enniel\Ami\Events\AmiEvent::class);
+        foreach (array_get($config, 'events', []) as $value) {
+            $handler = array_get($value, 'handler');
+            if($handler) {
+                $key = "ami.events.{$handler}";
+                $this->app->bind($key, $emitter);
+                $this->providers[] = $key;
+            }
+        }
+    }
+
+    /**
      * Get the services provided by the provider.
      *
      * @return array
      */
     public function provides()
     {
-        return [
-            'command.ami.listen',
-            'ami.eventloop',
-            'ami.connector',
-            'ami.cli',
-            'ami.action',
-            'ami.dongle.sms',
-            'ami.dongle.ussd',
-        ];
+        return $this->providers;
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Enniel\Ami\Commands;
 
-use Enniel\Ami\Ami;
-use Illuminate\Console\Command;
 use Clue\React\Ami\Client;
 
 class AmiAction extends AmiAbstract

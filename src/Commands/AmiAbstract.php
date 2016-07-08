@@ -18,8 +18,6 @@ abstract class AmiAbstract extends Command
 
     protected $client;
 
-    protected $events;
-
     protected $config;
 
     public function __construct(LoopInterface $loop, Factory $connector, array $config = [])
@@ -67,7 +65,6 @@ abstract class AmiAbstract extends Command
     public function client(Client $client)
     {
         $this->client = $client;
-        $this->events();
         $this->client->on('error', [$this, 'writeException']);
     }
 
@@ -96,22 +93,5 @@ abstract class AmiAbstract extends Command
         $this->loop->stop();
 
         return false;
-    }
-
-    public function events()
-    {
-        $events = $this->events || false;
-        $mask = 'off';
-        if ($events === false) {
-            $mask = 'off';
-        } elseif ($events === true) {
-            $mask = 'on';
-        } else {
-            $mask = implode(',', $events);
-        }
-
-        return $this->request('Events', [
-            'EventMask' => $mask,
-        ]);
     }
 }

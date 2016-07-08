@@ -2,17 +2,11 @@
 
 namespace Enniel\Ami\Commands;
 
-use Enniel\Ami\Ami;
-use Illuminate\Console\Command;
 use Clue\React\Ami\Client;
 use Clue\React\Ami\Protocol\Event;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Closure;
 
 class AmiListen extends AmiAbstract
 {
-    use DispatchesJobs;
     /**
      * The name and signature of the console command.
      *
@@ -38,16 +32,6 @@ class AmiListen extends AmiAbstract
         'Value',
     ];
 
-    protected $events = true;
-
-    public function listeners(Event $event)
-    {
-        $event = $event->getName();
-        $listeners = array_get($this->config, 'listeners', []);
-
-        return isset($listeners[$event]) ? $listeners[$event] : [];
-    }
-
     public function eventMonitor(Event $event)
     {
         $this->info($event->getName());
@@ -63,27 +47,13 @@ class AmiListen extends AmiAbstract
 
     public function eventListener(Event $event)
     {
-        foreach ($this->listeners($event) as $listener) {
-            $handler = $listener;
-            $delay = 0;
-            if (is_array($listener)) {
-                $handler = array_get($listener, 'handler', false);
-                $delay = (int) array_get($listener, 'arguments.delay', 0);
-            }
-            if ($handler) {
-                if (is_callable($handler) && $handler instanceof Closure) {
-                    call_user_func_array($handler, [$event]);
-                } elseif (is_callable($handler, 'handle')) {
-                    $handler = app()->make($handler, [$event]);
-                    if ($handler instanceof ShouldQueue) {
-                        $this->dispatch($handler->delay($delay));
-                    } else {
-                        event($handler);
-                    }
-                } elseif (is_callable($handler, '__construct')) {
-                    event(new $handler($event));
-                }
-            }
+        $name = "events.{$event->getName()}";
+        $handler = array_get($this->config, "$name.handler");
+        $options = array_get($this->config, "$name.options", []);
+        if($handler) {
+            $key = "ami.events.$handler";
+            $instance = app()->make($key, [$event, $options]);
+            event($key, $instance);
         }
     }
 

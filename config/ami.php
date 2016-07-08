@@ -5,501 +5,491 @@ return [
     'port' => 5038,
     'username' => null,
     'secret' => null,
-    'listeners' => [
-        'AgentCalled' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AgentComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AgentConnect' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AgentDump' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AgentLogin' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AgentLogoff' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AgentRingNoAnswer' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Agents' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AgentsComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AGIExecEnd' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AGIExecStart' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Alarm' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AlarmClear' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AOC-D' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AOC-E' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AOC-S' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AorDetail' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AsyncAGIEnd' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AsyncAGIExec' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AsyncAGIStart' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AttendedTransfer' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AuthDetail' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'AuthMethodNotAllowed' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BlindTransfer' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Bridge' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BridgeAction' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BridgeCreate' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BridgeDestroy' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BridgeEnter' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BridgeExec' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BridgeInfoChannel' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BridgeInfoComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BridgeLeave' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'BridgeMerge' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Cdr' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'CEL' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ChallengeResponseFailed' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ChallengeSent' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ChannelTalkingStart' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ChannelTalkingStop' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ChanSpyStart' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ChanSpyStop' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ConfbridgeEnd' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ConfbridgeJoin' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ConfbridgeLeave' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ConfbridgeMute' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ConfbridgeRecord' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ConfbridgeStart' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ConfbridgeStopRecord' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ConfbridgeTalking' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ConfbridgeUnmute' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ContactStatus' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ContactStatusDetail' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'CoreShowChannel' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'CoreShowChannelsComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'DAHDIChannel' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'DeviceStateChange' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'DeviceStateListComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Dial' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'DialBegin' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'DialEnd' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'DNDState' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'DTMF' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'DTMFBegin' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'DTMFEnd' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'EndpointDetail' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'EndpointDetailComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'EndpointList' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'EndpointListComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ExtensionStateListComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ExtensionStatus' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'FailedACL' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'FAXSession' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'FAXSessionsComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'FAXSessionsEntry' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'FAXStats' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'FAXStatus' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'FullyBooted' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Hangup' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'HangupHandlerPop' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'HangupHandlerPush' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'HangupHandlerRun' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'HangupRequest' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Hold' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'IdentifyDetail' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'InvalidAccountID' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'InvalidPassword' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'InvalidTransport' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Join' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Leave' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'LoadAverageLimit' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'LocalBridge' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'LocalOptimizationBegin' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'LocalOptimizationEnd' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'LogChannel' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Masquerade' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MCID' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MeetmeEnd' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MeetmeJoin' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MeetmeLeave' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MeetmeMute' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MeetmeTalking' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MeetmeTalkRequest' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MemoryLimit' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MessageWaiting' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MiniVoiceMail' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ModuleLoadReport' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MonitorStart' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MonitorStop' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MusicOnHoldStart' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MusicOnHoldStop' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MWIGet' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'MWIGetComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'NewAccountCode' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'NewCallerid' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Newchannel' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'NewExten' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'NewPeerAccount' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Newstate' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'OriginateResponse' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ParkedCall' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ParkedCallGiveUp' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ParkedCallSwap' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ParkedCallTimeOut' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'PeerStatus' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Pickup' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'PresenceStateChange' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'PresenceStateListComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'PresenceStatus' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueCallerAbandon' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueCallerJoin' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueCallerLeave' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueMemberAdded' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueMemberPause' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueMemberPaused' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueMemberPenalty' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueMemberRemoved' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueMemberRinginuse' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'QueueMemberStatus' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'ReceiveFAX' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Registry' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Reload' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Rename' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'RequestBadFormat' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'RequestNotAllowed' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'RequestNotSupported' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'RTCPReceived' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'RTCPSent' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'SendFAX' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'SessionLimit' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'SessionTimeout' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Shutdown' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'SIPQualifyPeerDone' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'SoftHangupRequest' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'SpanAlarm' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'SpanAlarmClear' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Status' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'StatusComplete' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'SuccessfulAuth' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'TransportDetail' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'UnexpectedAddress' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'Unhold' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'UnParkedCall' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'UserEvent' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
-        'VarSet' => [
-            \Enniel\Ami\Events\AmiEvent::class,
-        ],
+    'classes' => [
+        'event' => \Enniel\Ami\Events\AmiEvent::class,
     ],
+    'events' => [
+        //agent
+        'Agentcallbacklogin'        => [
+            'handler' => 'agent.callback.login',
+            'options' => [
+
+            ],
+        ],
+        'Agentcallbacklogoff'       => [
+            'handler' => 'agent.callback.logoff',
+            'options' => [
+
+            ],
+        ],
+        'AgentCalled'               => [
+            'handler' => 'agent.called',
+            'options' => [
+
+            ],
+        ],
+        'AgentComplete'             => [
+            'handler' => 'agent.complete',
+            'options' => [
+
+            ],
+        ],
+        'AgentConnect'              => [
+            'handler' => 'agent.connect',
+            'options' => [
+
+            ],
+        ],
+        'AgentDump'                 => [
+            'handler' => 'agent.dump',
+            'options' => [
+
+            ],
+        ],
+        'Agentlogin'                => [
+            'handler' => 'agent.login',
+            'options' => [
+
+            ],
+        ],
+        'Agentlogoff'               => [
+            'handler' => 'agent.logoff',
+            'options' => [
+
+            ],
+        ],
+        //dongle
+        'DongleDeviceEntry'         => [
+            'handler' => 'dongle.device.entry',
+            'options' => [
+
+            ]
+        ],
+        'DongleShowDevicesComplete' => [
+            'handler' => 'dongle.devices.show.complete',
+            'options' => [
+
+            ]
+        ],
+        'DongleUSSDStatus'          => [
+            'handler' => 'dongle.ussd.status',
+            'options' => [
+
+            ]
+        ],
+        'DongleSMSStatus'           => [
+            'handler' => 'dongle.sms.status',
+            'options' => [
+
+            ]
+        ],
+        'DongleNewCUSD'             => [
+            'handler' => 'dongle.cusd.new',
+            'options' => [
+
+            ]
+        ],
+        'DongleNewUSSD'             => [
+            'handler' => 'dongle.ussd.new',
+            'options' => [
+
+            ]
+        ],
+        'DongleNewUSSDBase64'       => [
+            'handler' => 'dongle.ussd.base64.new',
+            'options' => [
+
+            ]
+        ],
+        'DongleCEND'                => [
+            'handler' => 'dongle.cend',
+            'options' => [
+
+            ]
+        ],
+        'DongleCallStateChange'     => [
+            'handler' => 'dongle.call.state.change',
+            'options' => [
+
+            ]
+        ],
+        'DongleStatus'              => [
+            'handler' => 'dongle.status',
+            'options' => [
+
+            ]
+        ],
+        'DongleNewCMGR'             => [
+            'handler' => 'dongle.cmgr.new',
+            'options' => [
+
+            ]
+        ],
+        'DongleNewSMS'              => [
+            'handler' => 'dongle.sms.new',
+            'options' => [
+
+            ]
+        ],
+        'DongleNewSMSBase64'        => [
+            'handler' => 'dongle.sms.base64.new',
+            'options' => [
+
+            ]
+        ],
+        'DonglePortFail'            => [
+            'handler' => 'dongle.port.fail',
+            'options' => [
+
+            ]
+        ],
+        //queue
+        'QueueMemberAdded'          => [
+            'handler' => 'queue.member.added',
+            'options' => [
+
+            ],
+        ],
+        'QueueMemberPaused'         => [
+            'handler' => 'queue.member.paused',
+            'options' => [
+
+            ],
+        ],
+        'QueueMemberStatus'         => [
+            'handler' => 'queue.member.status',
+            'options' => [
+
+            ],
+        ],
+        'QueueParams'               => [
+            'handler' => 'queue.params',
+            'options' => [
+
+            ],
+        ],
+        'QueueMember'               => [
+            'handler' => 'queue.member',
+            'options' => [
+
+            ],
+        ],
+        'QueueStatus'               => [
+            'handler' => 'queue.status',
+            'options' => [
+
+            ],
+        ],
+        //meetme
+        'MeetmeJoin'                => [
+            'handler' => 'meetme.join',
+            'options' => [
+
+            ],
+        ],
+        'MeetmeLeave'               => [
+            'handler' => 'meetme.leave',
+            'options' => [
+
+            ],
+        ],
+        'MeetmeStopTalking'         => [
+            'handler' => 'meetme.talking.stop',
+            'options' => [
+
+            ],
+        ],
+        'MeetmeTalking'             => [
+            'handler' => 'meetme.talking',
+            'options' => [
+
+            ],
+        ],
+        //hangup
+        'SoftHangupRequest'         => [
+            'handler' => 'hangup.request.soft',
+            'options' => [
+
+            ],
+        ],
+        'HangupRequest'             => [
+            'handler' => 'hangup.request',
+            'options' => [
+
+            ],
+        ],
+        'Hangup'                    => [
+            'handler' => 'hangup',
+            'options' => [
+
+            ],
+        ],
+        //call
+        'UnParkedCall'              => [
+            'handler' => 'call.unparked',
+            'options' => [
+
+            ],
+        ],
+        'ParkedCall'                => [
+            'handler' => 'call.parked',
+            'options' => [
+
+            ],
+        ],
+        //channel
+        'ChannelUpdate'             => [
+            'handler' => 'channel.update',
+            'options' => [
+
+            ],
+        ],
+        'ChannelReload'             => [
+            'handler' => 'channel.reload',
+            'options' => [
+
+            ],
+        ],
+        'LogChannel'                => [
+            'handler' => 'channel.log',
+            'options' => [
+
+            ],
+        ],
+        'Newchannel'                => [
+            'handler' => 'channel.new',
+            'options' => [
+
+            ],
+        ],
+        //extension
+        'ExtensionStatus'           => [
+            'handler' => 'extension.status',
+            'options' => [
+
+            ],
+        ],
+        'Newexten'                  => [
+            'handler' => 'extension.new',
+            'options' => [
+
+            ],
+        ],
+        //bridge
+        'Bridge'                    => [
+            'handler' => 'bridge',
+            'options' => [
+
+            ],
+        ],
+        'LocalBridge'               => [
+            'handler' => 'bridge.local',
+            'options' => [
+
+            ],
+        ],
+        //alarm
+        'Alarm'                     => [
+            'handler' => 'alarm',
+            'options' => [
+
+            ],
+        ],
+        'AlarmClear'                => [
+            'handler' => 'alarm.clear',
+            'options' => [
+
+            ],
+        ],
+        //status
+        'Status'                    => [
+            'handler' => 'status',
+            'options' => [
+
+            ],
+        ],
+        'StatusComplete'            => [
+            'handler' => 'status.complete',
+            'options' => [
+
+            ],
+        ],
+        //zap channel
+        'ZapShowChannels'           => [
+            'handler' => 'zap.channel.show',
+            'options' => [
+
+            ],
+        ],
+        'ZapShowChannelsComplete'   => [
+            'handler' => 'zap.channel.show.complete',
+            'options' => [
+
+            ],
+        ],
+        //cdr
+        'Cdr'                       => [
+            'handler' => 'cdr',
+            'options' => [
+
+            ],
+        ],
+        'SetCDRUserField'           => [
+            'handler' => 'cdr.set.field.user',
+            'options' => [
+
+            ],
+        ],
+        //others
+        'Dial'                      => [
+            'handler' => 'dial',
+            'options' => [
+
+            ],
+        ],
+        'Masquerade'                => [
+            'handler' => 'masquerade',
+            'options' => [
+
+            ],
+        ],
+        'SkypeBuddyStatus'          => [
+            'handler' => 'skype.buddy.status',
+            'options' => [
+
+            ],
+        ],
+        'DNDState'                  => [
+            'handler' => 'dnd.state',
+            'options' => [
+
+            ],
+        ],
+        'PeerStatus'                => [
+            'handler' => 'peer.status',
+            'options' => [
+
+            ],
+        ],
+        'Registry'                  => [
+            'handler' => 'registry',
+            'options' => [
+
+            ],
+        ],
+        'Reload'                    => [
+            'handler' => 'reload',
+            'options' => [
+
+            ],
+        ],
+        'Shutdown'                  => [
+            'handler' => 'shutdown',
+            'options' => [
+
+            ],
+        ],
+        'UserEvent'                 => [
+            'handler' => 'user',
+            'options' => [
+
+            ],
+        ],
+        'DTMF'                      => [
+            'handler' => 'dtmf',
+            'options' => [
+
+            ],
+        ],
+        'VarSet'                    => [
+            'handler' => 'var.set',
+            'options' => [
+
+            ],
+        ],
+        'NewAccountCode'            => [
+            'handler' => 'account.code.new',
+            'options' => [
+
+            ],
+        ],
+        'MusicOnHold'               => [
+            'handler' => 'music.on.hold',
+            'options' => [
+
+            ],
+        ],
+        'Join'                      => [
+            'handler' => 'join',
+            'options' => [
+
+            ],
+        ],
+        'Leave'                     => [
+            'handler' => 'leave',
+            'options' => [
+
+            ],
+        ],
+        'Link'                      => [
+            'handler' => 'link',
+            'options' => [
+
+            ],
+        ],
+        'MessageWaiting'            => [
+            'handler' => 'message.waiting',
+            'options' => [
+
+            ],
+        ],
+        'Newcallerid'               => [
+            'handler' => 'caller.id.new',
+            'options' => [
+
+            ],
+        ],
+        'Rename'                    => [
+            'handler' => 'rename',
+            'options' => [
+
+            ],
+        ],
+        'Unlink'                    => [
+            'handler' => 'unlink',
+            'options' => [
+
+            ],
+        ],
+        'RTPReceiverStat'           => [
+            'handler' => 'rtp.receiver.stat',
+            'options' => [
+
+            ],
+        ],
+        'RTCPSent'                  => [
+            'handler' => 'rtcp.sent',
+            'options' => [
+
+            ],
+        ],
+        'RTCPReceived'              => [
+            'handler' => 'rtcp.received',
+            'options' => [
+
+            ],
+        ],
+        'Newstate'                  => [
+            'handler' => 'state.new',
+            'options' => [
+
+            ],
+        ],
+        'ParkedCallsComplete'       => [
+            'handler' => 'calls.parked.complete',
+            'options' => [
+
+            ],
+        ],
+    ]
 ];
