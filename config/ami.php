@@ -9,487 +9,443 @@ return [
         'event' => \Enniel\Ami\Events\AmiEvent::class,
     ],
     'events' => [
-        //agent
-        'Agentcallbacklogin'        => [
-            'handler' => 'agent.callback.login',
+        'AGIExec' => [
+            'handler' => 'agi_exec',
+            'options' => [
+                
+            ]
+        ],
+        'AgentConnect' => [
+            'handler' => 'agent_connect',
             'options' => [
 
-            ],
+            ]
         ],
-        'Agentcallbacklogoff'       => [
-            'handler' => 'agent.callback.logoff',
+        'AgentComplete' => [
+            'handler' => 'agent_complete',
             'options' => [
 
-            ],
+            ]
         ],
-        'AgentCalled'               => [
-            'handler' => 'agent.called',
+        'Agentlogin' => [
+            'handler' => 'agent_login',
             'options' => [
 
-            ],
+            ]
         ],
-        'AgentComplete'             => [
-            'handler' => 'agent.complete',
+        'Agentlogoff' => [
+            'handler' => 'agent_logoff',
             'options' => [
 
-            ],
+            ]
         ],
-        'AgentConnect'              => [
-            'handler' => 'agent.connect',
+        'Agents' => [
+            'handler' => 'agents',
             'options' => [
 
-            ],
+            ]
         ],
-        'AgentDump'                 => [
-            'handler' => 'agent.dump',
+        'AsyncAGI' => [
+            'handler' => 'async_agi',
             'options' => [
 
-            ],
+            ]
         ],
-        'Agentlogin'                => [
-            'handler' => 'agent.login',
+        'Bridge' => [
+            'handler' => 'bridge',
             'options' => [
 
-            ],
+            ]
         ],
-        'Agentlogoff'               => [
-            'handler' => 'agent.logoff',
+        'CEL' => [
+            'handler' => 'cel',
             'options' => [
 
-            ],
+            ]
         ],
-        //dongle
-        'DongleDeviceEntry'         => [
-            'handler' => 'dongle.device.entry',
+        'ChannelUpdate' => [
+            'handler' => 'channel_update',
+            'options' => [
+
+            ]
+        ],
+        'CoreShowChannel' => [
+            'handler' => 'core_show_channel',
+            'options' => [
+
+            ]
+        ],
+        'CoreShowChannelsComplete' => [
+            'handler' => 'core_show_channels_complete',
+            'options' => [
+
+            ]
+        ],
+        'DAHDIShowChannelsComplete' => [
+            'handler' => 'dahdi_show_channels_complete',
+            'options' => [
+
+            ]
+        ],
+        'DAHDIShowChannels' => [
+            'handler' => 'dahdi_show_channels',
+            'options' => [
+
+            ]
+        ],
+        'DBGetResponse' => [
+            'handler' => 'db_get_response',
+            'options' => [
+
+            ]
+        ],
+        'DTMF' => [
+            'handler' => 'dtmf',
+            'options' => [
+
+            ]
+        ],
+        'Dial' => [
+            'handler' => 'dial',
+            'options' => [
+
+            ]
+        ],
+        'DongleDeviceEntry' => [
+            'handler' => 'dongle_device_entry',
+            'options' => [
+
+            ]
+        ],
+        'DongleNewCUSD' => [
+            'handler' => 'dongle_new_cusd',
+            'options' => [
+
+            ]
+        ],
+        'DongleNewUSSDBase64' => [
+            'handler' => 'dongle_new_ussd_base64',
+            'options' => [
+
+            ]
+        ],
+        'DongleNewUSSD' => [
+            'handler' => 'dongle_new_ussd',
+            'options' => [
+
+            ]
+        ],
+        'DongleSMSStatus' => [
+            'handler' => 'dongle_sms_status',
             'options' => [
 
             ]
         ],
         'DongleShowDevicesComplete' => [
-            'handler' => 'dongle.devices.show.complete',
+            'handler' => 'dongle_show_devices_complete',
             'options' => [
 
             ]
         ],
-        'DongleUSSDStatus'          => [
-            'handler' => 'dongle.ussd.status',
+        'DongleStatus' => [
+            'handler' => 'dongle_status',
             'options' => [
 
             ]
         ],
-        'DongleSMSStatus'           => [
-            'handler' => 'dongle.sms.status',
+        'DongleUSSDStatus' => [
+            'handler' => 'dongle_ussd_status',
             'options' => [
 
             ]
         ],
-        'DongleNewCUSD'             => [
-            'handler' => 'dongle.cusd.new',
+        'ExtensionStatus' => [
+            'handler' => 'extension_status',
             'options' => [
 
             ]
         ],
-        'DongleNewUSSD'             => [
-            'handler' => 'dongle.ussd.new',
+        'FullyBooted' => [
+            'handler' => 'fully_booted',
             'options' => [
 
             ]
         ],
-        'DongleNewUSSDBase64'       => [
-            'handler' => 'dongle.ussd.base64.new',
-            'options' => [
-
-            ]
-        ],
-        'DongleCEND'                => [
-            'handler' => 'dongle.cend',
-            'options' => [
-
-            ]
-        ],
-        'DongleCallStateChange'     => [
-            'handler' => 'dongle.call.state.change',
-            'options' => [
-
-            ]
-        ],
-        'DongleStatus'              => [
-            'handler' => 'dongle.status',
-            'options' => [
-
-            ]
-        ],
-        'DongleNewCMGR'             => [
-            'handler' => 'dongle.cmgr.new',
-            'options' => [
-
-            ]
-        ],
-        'DongleNewSMS'              => [
-            'handler' => 'dongle.sms.new',
-            'options' => [
-
-            ]
-        ],
-        'DongleNewSMSBase64'        => [
-            'handler' => 'dongle.sms.base64.new',
-            'options' => [
-
-            ]
-        ],
-        'DonglePortFail'            => [
-            'handler' => 'dongle.port.fail',
-            'options' => [
-
-            ]
-        ],
-        //queue
-        'QueueMemberAdded'          => [
-            'handler' => 'queue.member.added',
-            'options' => [
-
-            ],
-        ],
-        'QueueMemberPaused'         => [
-            'handler' => 'queue.member.paused',
-            'options' => [
-
-            ],
-        ],
-        'QueueMemberStatus'         => [
-            'handler' => 'queue.member.status',
-            'options' => [
-
-            ],
-        ],
-        'QueueParams'               => [
-            'handler' => 'queue.params',
-            'options' => [
-
-            ],
-        ],
-        'QueueMember'               => [
-            'handler' => 'queue.member',
-            'options' => [
-
-            ],
-        ],
-        'QueueStatus'               => [
-            'handler' => 'queue.status',
-            'options' => [
-
-            ],
-        ],
-        //meetme
-        'MeetmeJoin'                => [
-            'handler' => 'meetme.join',
-            'options' => [
-
-            ],
-        ],
-        'MeetmeLeave'               => [
-            'handler' => 'meetme.leave',
-            'options' => [
-
-            ],
-        ],
-        'MeetmeStopTalking'         => [
-            'handler' => 'meetme.talking.stop',
-            'options' => [
-
-            ],
-        ],
-        'MeetmeTalking'             => [
-            'handler' => 'meetme.talking',
-            'options' => [
-
-            ],
-        ],
-        //hangup
-        'SoftHangupRequest'         => [
-            'handler' => 'hangup.request.soft',
-            'options' => [
-
-            ],
-        ],
-        'HangupRequest'             => [
-            'handler' => 'hangup.request',
-            'options' => [
-
-            ],
-        ],
-        'Hangup'                    => [
+        'Hangup' => [
             'handler' => 'hangup',
             'options' => [
 
-            ],
+            ]
         ],
-        //call
-        'UnParkedCall'              => [
-            'handler' => 'call.unparked',
+        'Hold' => [
+            'handler' => 'hold',
             'options' => [
 
-            ],
+            ]
         ],
-        'ParkedCall'                => [
-            'handler' => 'call.parked',
+        'JabberEvent' => [
+            'handler' => 'jabber',
             'options' => [
 
-            ],
+            ]
         ],
-        //channel
-        'ChannelUpdate'             => [
-            'handler' => 'channel.update',
-            'options' => [
-
-            ],
-        ],
-        'ChannelReload'             => [
-            'handler' => 'channel.reload',
-            'options' => [
-
-            ],
-        ],
-        'LogChannel'                => [
-            'handler' => 'channel.log',
-            'options' => [
-
-            ],
-        ],
-        'Newchannel'                => [
-            'handler' => 'channel.new',
-            'options' => [
-
-            ],
-        ],
-        //extension
-        'ExtensionStatus'           => [
-            'handler' => 'extension.status',
-            'options' => [
-
-            ],
-        ],
-        'Newexten'                  => [
-            'handler' => 'extension.new',
-            'options' => [
-
-            ],
-        ],
-        //bridge
-        'Bridge'                    => [
-            'handler' => 'bridge',
-            'options' => [
-
-            ],
-        ],
-        'LocalBridge'               => [
-            'handler' => 'bridge.local',
-            'options' => [
-
-            ],
-        ],
-        //alarm
-        'Alarm'                     => [
-            'handler' => 'alarm',
-            'options' => [
-
-            ],
-        ],
-        'AlarmClear'                => [
-            'handler' => 'alarm.clear',
-            'options' => [
-
-            ],
-        ],
-        //status
-        'Status'                    => [
-            'handler' => 'status',
-            'options' => [
-
-            ],
-        ],
-        'StatusComplete'            => [
-            'handler' => 'status.complete',
-            'options' => [
-
-            ],
-        ],
-        //zap channel
-        'ZapShowChannels'           => [
-            'handler' => 'zap.channel.show',
-            'options' => [
-
-            ],
-        ],
-        'ZapShowChannelsComplete'   => [
-            'handler' => 'zap.channel.show.complete',
-            'options' => [
-
-            ],
-        ],
-        //cdr
-        'Cdr'                       => [
-            'handler' => 'cdr',
-            'options' => [
-
-            ],
-        ],
-        'SetCDRUserField'           => [
-            'handler' => 'cdr.set.field.user',
-            'options' => [
-
-            ],
-        ],
-        //others
-        'Dial'                      => [
-            'handler' => 'dial',
-            'options' => [
-
-            ],
-        ],
-        'Masquerade'                => [
-            'handler' => 'masquerade',
-            'options' => [
-
-            ],
-        ],
-        'SkypeBuddyStatus'          => [
-            'handler' => 'skype.buddy.status',
-            'options' => [
-
-            ],
-        ],
-        'DNDState'                  => [
-            'handler' => 'dnd.state',
-            'options' => [
-
-            ],
-        ],
-        'PeerStatus'                => [
-            'handler' => 'peer.status',
-            'options' => [
-
-            ],
-        ],
-        'Registry'                  => [
-            'handler' => 'registry',
-            'options' => [
-
-            ],
-        ],
-        'Reload'                    => [
-            'handler' => 'reload',
-            'options' => [
-
-            ],
-        ],
-        'Shutdown'                  => [
-            'handler' => 'shutdown',
-            'options' => [
-
-            ],
-        ],
-        'UserEvent'                 => [
-            'handler' => 'user',
-            'options' => [
-
-            ],
-        ],
-        'DTMF'                      => [
-            'handler' => 'dtmf',
-            'options' => [
-
-            ],
-        ],
-        'VarSet'                    => [
-            'handler' => 'var.set',
-            'options' => [
-
-            ],
-        ],
-        'NewAccountCode'            => [
-            'handler' => 'account.code.new',
-            'options' => [
-
-            ],
-        ],
-        'MusicOnHold'               => [
-            'handler' => 'music.on.hold',
-            'options' => [
-
-            ],
-        ],
-        'Join'                      => [
+        'Join' => [
             'handler' => 'join',
             'options' => [
 
-            ],
+            ]
         ],
-        'Leave'                     => [
+        'Leave' => [
             'handler' => 'leave',
             'options' => [
 
-            ],
+            ]
         ],
-        'Link'                      => [
+        'Link' => [
             'handler' => 'link',
             'options' => [
 
-            ],
+            ]
         ],
-        'MessageWaiting'            => [
-            'handler' => 'message.waiting',
+        'ListDialPlan' => [
+            'handler' => 'list_dial_plan',
             'options' => [
 
-            ],
+            ]
         ],
-        'Newcallerid'               => [
-            'handler' => 'caller.id.new',
+        'Masquerade' => [
+            'handler' => 'masquerade',
             'options' => [
 
-            ],
+            ]
         ],
-        'Rename'                    => [
+        'MessageWaiting' => [
+            'handler' => 'message_waiting',
+            'options' => [
+
+            ]
+        ],
+        'MusicOnHold' => [
+            'handler' => 'music_on_hold',
+            'options' => [
+
+            ]
+        ],
+        'NewAccountCode' => [
+            'handler' => 'new_account_code',
+            'options' => [
+
+            ]
+        ],
+        'NewCallerid' => [
+            'handler' => 'new_caller_id',
+            'options' => [
+
+            ]
+        ],
+        'Newchannel' => [
+            'handler' => 'new_channel',
+            'options' => [
+
+            ]
+        ],
+        'Newexten' => [
+            'handler' => 'new_extension',
+            'options' => [
+
+            ]
+        ],
+        'Newstate' => [
+            'handler' => 'new_state',
+            'options' => [
+
+            ]
+        ],
+        'OriginateResponse' => [
+            'handler' => 'originate_response',
+            'options' => [
+
+            ]
+        ],
+        'ParkedCall' => [
+            'handler' => 'parked_call',
+            'options' => [
+
+            ]
+        ],
+        'ParkedCallsComplete' => [
+            'handler' => 'parked_calls_complete',
+            'options' => [
+
+            ]
+        ],
+        'PeerEntry' => [
+            'handler' => 'peer_entry',
+            'options' => [
+
+            ]
+        ],
+        'PeerStatus' => [
+            'handler' => 'peer_status',
+            'options' => [
+
+            ]
+        ],
+        'PeerlistComplete' => [
+            'handler' => 'peer_list_complete',
+            'options' => [
+
+            ]
+        ],
+        'QueueMemberAdded' => [
+            'handler' => 'queue_member_added',
+            'options' => [
+
+            ]
+        ],
+        'QueueMember' => [
+            'handler' => 'queue_member',
+            'options' => [
+
+            ]
+        ],
+        'QueueMemberPaused' => [
+            'handler' => 'queue_member_paused',
+            'options' => [
+
+            ]
+        ],
+        'QueueMemberRemoved' => [
+            'handler' => 'queue_member_removed',
+            'options' => [
+
+            ]
+        ],
+        'QueueMemberStatus' => [
+            'handler' => 'queue_member_status',
+            'options' => [
+
+            ]
+        ],
+        'QueueParams' => [
+            'handler' => 'queue_params',
+            'options' => [
+
+            ]
+        ],
+        'QueueStatusComplete' => [
+            'handler' => 'queue_status_complete',
+            'options' => [
+
+            ]
+        ],
+        'QueueSummaryComplete' => [
+            'handler' => 'queue_summary_complete',
+            'options' => [
+
+            ]
+        ],
+        'QueueSummary' => [
+            'handler' => 'queue_summary',
+            'options' => [
+
+            ]
+        ],
+        'RTCPReceived' => [
+            'handler' => 'rtcp_received',
+            'options' => [
+
+            ]
+        ],
+        'RTCPReceiverStat' => [
+            'handler' => 'rtcp_receiver_stat',
+            'options' => [
+
+            ]
+        ],
+        'RTCPSent' => [
+            'handler' => 'rtcp_sent',
+            'options' => [
+
+            ]
+        ],
+        'RTPReceiverStat' => [
+            'handler' => 'rtp_receiver_stat',
+            'options' => [
+
+            ]
+        ],
+        'RTPSenderStat' => [
+            'handler' => 'rtp_sender_stat',
+            'options' => [
+
+            ]
+        ],
+        'RegistrationsComplete' => [
+            'handler' => 'registrations_complete',
+            'options' => [
+
+            ]
+        ],
+        'Registry' => [
+            'handler' => 'registry',
+            'options' => [
+
+            ]
+        ],
+        'Rename' => [
             'handler' => 'rename',
             'options' => [
 
-            ],
+            ]
         ],
-        'Unlink'                    => [
+        'ShowDialPlanComplete' => [
+            'handler' => 'show_dial_plan_complete',
+            'options' => [
+
+            ]
+        ],
+        'StatusComplete' => [
+            'handler' => 'status_complete',
+            'options' => [
+
+            ]
+        ],
+        'Status' => [
+            'handler' => 'status',
+            'options' => [
+
+            ]
+        ],
+        'Transfer' => [
+            'handler' => 'transfer',
+            'options' => [
+
+            ]
+        ],
+        'UnParkedCall' => [
+            'handler' => 'unparked_call',
+            'options' => [
+
+            ]
+        ],
+        'Unlink' => [
             'handler' => 'unlink',
             'options' => [
 
-            ],
+            ]
         ],
-        'RTPReceiverStat'           => [
-            'handler' => 'rtp.receiver.stat',
+        'UserEvent' => [
+            'handler' => 'user_event',
             'options' => [
 
-            ],
+            ]
         ],
-        'RTCPSent'                  => [
-            'handler' => 'rtcp.sent',
+        'VarSet' => [
+            'handler' => 'var_set',
             'options' => [
 
-            ],
-        ],
-        'RTCPReceived'              => [
-            'handler' => 'rtcp.received',
-            'options' => [
-
-            ],
-        ],
-        'Newstate'                  => [
-            'handler' => 'state.new',
-            'options' => [
-
-            ],
-        ],
-        'ParkedCallsComplete'       => [
-            'handler' => 'calls.parked.complete',
-            'options' => [
-
-            ],
-        ],
+            ]
+        ]
     ]
 ];
