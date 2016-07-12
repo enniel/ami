@@ -45,7 +45,7 @@ class AmiListen extends AmiAbstract
         $this->table($this->headers, $fields);
     }
 
-    public function eventListener(Event $event)
+    public function eventEmitter(Event $event)
     {
         $name = "events.{$event->getName()}";
         $handler = array_get($this->config, "$name.handler");
@@ -68,6 +68,6 @@ class AmiListen extends AmiAbstract
             // the connection to the AMI just closed
             $this->info('closed listen ami');
         });
-        $client->on('event', [$this, 'eventListener']);
+        $client->on('event', [$this, 'eventEmitter']);
     }
 }
