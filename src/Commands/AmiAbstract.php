@@ -46,6 +46,8 @@ abstract class AmiAbstract extends Command
         $options = array_merge($this->config, $options);
         extract($options);
         $host = isset($host) ? $host : '127.0.0.1';
+        $schema = parse_url($host, PHP_URL_SCHEME);
+        $schema = $schema ? $schema : 'tcp';
         $port = isset($port) ? $port : 5038;
         $username = isset($username) ? $username : null;
         $secret = isset($secret) ? $secret : null;
@@ -53,7 +55,7 @@ abstract class AmiAbstract extends Command
         if($username && $secret) {
             $auth = "{$username}:{$secret}@";
         }
-        return "tcp://{$auth}{$host}:{$port}";
+        return "{$schema}://{$auth}{$host}:{$port}";
     }
 
     /**
