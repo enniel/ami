@@ -3,6 +3,7 @@
 namespace Enniel\Ami\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Config\Repository;
 use React\EventLoop\LoopInterface;
 use Clue\React\Ami\Client;
 use Clue\React\Ami\Factory;
@@ -20,11 +21,12 @@ abstract class AmiAbstract extends Command
 
     protected $config;
 
-    public function __construct(LoopInterface $loop, Factory $connector, array $config = [])
+    public function __construct(LoopInterface $loop, Factory $connector, Repository $repository)
     {
         parent::__construct();
         $this->loop = $loop;
         $this->connector = $connector;
+        $config = $repository->all();
         $events = [];
         foreach (array_get($config, 'events', []) as $key => $value) {
             $key = mb_strtolower($key);

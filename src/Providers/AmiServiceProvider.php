@@ -3,6 +3,7 @@
 namespace Enniel\Ami\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Config\Repository;
 use Enniel\Ami\Commands\AmiListen;
 use Enniel\Ami\Commands\AmiCli;
 use Enniel\Ami\Commands\AmiAction;
@@ -54,6 +55,7 @@ class AmiServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+        $this->registerConfigRepository();
         $this->registerEvents();
         $this->registerEventLoop();
         $this->registerConnector();
@@ -71,6 +73,16 @@ class AmiServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(realpath(__DIR__.'/../../config/ami.php'), 'ami');
     }
+    
+    /**
+     * Register the configuration repository.
+     */
+    protected function registerConfigRepository()
+    {
+        $this->app->singleton('ami.config', function() {
+            return new Repository(config('ami'));
+        });
+    }
 
     /**
      * Register the ami listen command.
@@ -78,7 +90,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerAmiListen()
     {
         $this->app->singleton('command.ami.listen', function ($app) {
-            return new AmiListen($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
+            return new AmiListen($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
         });
         $this->commands('command.ami.listen');
     }
@@ -89,7 +101,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerAmiCli()
     {
         $this->app->singleton('command.ami.cli', function ($app) {
-            return new AmiCli($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
+            return new AmiCli($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
         });
         $this->commands('command.ami.cli');
     }
@@ -100,7 +112,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerAmiAction()
     {
         $this->app->singleton('command.ami.action', function ($app) {
-            return new AmiAction($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
+            return new AmiAction($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
         });
         $this->commands('command.ami.action');
     }
@@ -111,7 +123,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerDongleSms()
     {
         $this->app->singleton('command.ami.dongle.sms', function ($app) {
-            return new AmiSms($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
+            return new AmiSms($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
         });
         $this->commands('command.ami.dongle.sms');
     }
@@ -122,7 +134,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerDongleUssd()
     {
         $this->app->singleton('command.ami.dongle.ussd', function ($app) {
-            return new AmiUssd($app->make('ami.eventloop'), $app->make('ami.connector'), config('ami'));
+            return new AmiUssd($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
         });
         $this->commands('command.ami.dongle.ussd');
     }
