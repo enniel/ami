@@ -9,7 +9,6 @@ use Enniel\Ami\Commands\AmiCli;
 use Enniel\Ami\Commands\AmiAction;
 use Enniel\Ami\Commands\AmiSms;
 use Enniel\Ami\Commands\AmiUssd;
-use Enniel\Ami\Ami;
 use React\EventLoop\StreamSelectLoop;
 use React\EventLoop\LoopInterface;
 use Clue\React\Ami\Factory;
@@ -73,7 +72,7 @@ class AmiServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(realpath(__DIR__.'/../../config/ami.php'), 'ami');
     }
-    
+
     /**
      * Register the configuration repository.
      */
