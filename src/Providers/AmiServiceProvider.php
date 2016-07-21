@@ -35,6 +35,7 @@ class AmiServiceProvider extends ServiceProvider
         'command.ami.dongle.ussd',
         'ami.eventloop',
         'ami.connector',
+        'ami.config',
     ];
 
     /**
