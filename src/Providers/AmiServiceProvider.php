@@ -55,7 +55,6 @@ class AmiServiceProvider extends ServiceProvider
     {
         $this->registerConfig();
         $this->registerConfigRepository();
-        $this->registerEvents();
         $this->registerEventLoop();
         $this->registerConnector();
         $this->registerAmiListen();
@@ -157,23 +156,6 @@ class AmiServiceProvider extends ServiceProvider
         $this->app->singleton('ami.connector', function ($app) {
             return new Factory($app->make('ami.eventloop'));
         });
-    }
-
-    /**
-     * Register events.
-     */
-    protected function registerEvents()
-    {
-        $config = config('ami');
-        $emitter = array_get($config, 'classes.event', \Enniel\Ami\Events\AmiEvent::class);
-        foreach (array_get($config, 'events', []) as $value) {
-            $handler = array_get($value, 'handler');
-            if($handler) {
-                $key = "ami.events.{$handler}";
-                $this->app->bind($key, $emitter);
-                $this->providers[] = $key;
-            }
-        }
     }
 
     /**

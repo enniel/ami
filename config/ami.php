@@ -5,9 +5,6 @@ return [
     'port' => 5038,
     'username' => null,
     'secret' => null,
-    'classes' => [
-        'event' => \Enniel\Ami\Events\AmiEvent::class,
-    ],
     'events' => [
         'AGIExec' => [
             'handler' => 'agi_exec',
