@@ -51,9 +51,7 @@ class AmiListen extends AmiAbstract
         $handler = array_get($this->config, "$name.handler");
         $options = array_get($this->config, "$name.options", []);
         if($handler) {
-            $key = "ami.events.$handler";
-            $instance = app()->make($key, [$event, $options]);
-            event($key, $instance);
+            event($key, [$event, $options]);
         }
     }
 
