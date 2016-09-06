@@ -8,7 +8,7 @@ Installation and configuration
 To install as a [composer](https://getcomposer.org/) package to be used with Laravel 5, simply run:
 
 ```sh
-composer require "enniel/ami"
+composer require enniel/ami:1.0.x-dev
 ```
 
 Once it's installed, you can register the service provider in `config/app.php` in the `providers` array:
