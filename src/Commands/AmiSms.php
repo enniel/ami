@@ -31,10 +31,16 @@ class AmiSms extends AmiAbstract
      */
     protected $description = 'Send sms from asterisk ami using chan dongle';
 
+    protected function getDevice()
+    {
+        $device = $this->argument('device');
+        return $device ? $device : array_get($this->config, 'dongle.sms.device');
+    }
+
     public function sendSms()
     {
         $this->request('DongleSendSms', [
-            'Device' => $this->argument('device'),
+            'Device' => $this->getDevice(),
             'Number' => $this->argument('number'),
             'Message' => $this->argument('message'),
         ])->then([$this, 'writeResponse'], [$this, 'writeException']);
@@ -48,7 +54,7 @@ class AmiSms extends AmiAbstract
         $promises = [];
         foreach ($pdu->getParts() as $part) {
             $promises[] = $this->request('DongleSendPdu', [
-                'Device' => $this->argument('device'),
+                'Device' => $this->getDevice(),
                 'PDU' => (string) $part,
             ]);
         }

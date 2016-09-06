@@ -5,6 +5,11 @@ return [
     'port' => 5038,
     'username' => null,
     'secret' => null,
+    'dongle' => [
+        'sms' => [
+            'device' => null,
+        ],
+    ],
     'events' => [
         'AGIExec' => [
             'handler' => 'agi_exec',
