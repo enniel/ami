@@ -20,7 +20,7 @@
         "illuminate/config": "~5.1",
         "php" : "~5.5|~7.0",
         "ext-mbstring": "*",
-        "clue/ami-react": "dev-master",
+        "clue/ami-react": "@dev",
         "jackkum/phppdu": "^1.2.10"
     },
     "require-dev": {
@@ -38,7 +38,13 @@
             "Enniel\\Ami\\": "tests"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
     "scripts": {
         "test": "phpunit"
-    }
+    },
+    "minimum-stability": "dev"
 }
