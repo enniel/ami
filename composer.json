@@ -20,7 +20,7 @@
         "illuminate/config": "~5.1",
         "php" : "~5.5|~7.0",
         "ext-mbstring": "*",
-        "clue/ami-react": "@dev",
+        "clue/ami-react": "dev-master",
         "jackkum/phppdu": "^1.2.10"
     },
     "require-dev": {
