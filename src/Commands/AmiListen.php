@@ -50,6 +50,7 @@ class AmiListen extends AmiAbstract
         $name = mb_strtolower("events.{$event->getName()}");
         $handler = array_get($this->config, "$name.handler");
         $options = array_get($this->config, "$name.options", []);
+        event('ami.events.*', [$event, $options]);
         if($handler) {
             event('ami.events.'.$handler, [$event, $options]);
         }
