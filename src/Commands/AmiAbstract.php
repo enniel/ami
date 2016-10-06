@@ -2,13 +2,12 @@
 
 namespace Enniel\Ami\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Config\Repository;
-use React\EventLoop\LoopInterface;
-use Clue\React\Ami\Client;
-use Clue\React\Ami\Factory;
 use Clue\React\Ami\Protocol\Response;
-use Clue\React\Ami\Protocol\UnexpectedValueException;
+use React\EventLoop\LoopInterface;
+use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
+use Clue\React\Ami\Client;
+use Enniel\Ami\Factory;
 use Exception;
 
 abstract class AmiAbstract extends Command
@@ -21,43 +20,20 @@ abstract class AmiAbstract extends Command
 
     protected $config;
 
-    public function __construct(LoopInterface $loop, Factory $connector, Repository $repository)
+    protected $events;
+
+    public function __construct(LoopInterface $loop, Factory $connector, array $config = [])
     {
         parent::__construct();
         $this->loop = $loop;
         $this->connector = $connector;
-        $config = $repository->all();
         $events = [];
-        foreach (array_get($config, 'events', []) as $key => $value) {
+        foreach (Arr::get($config, 'events', []) as $key => $value) {
             $key = mb_strtolower($key);
             $events[$key] = $value;
         }
-        $config['events'] = $events;
+        $this->events = $events;
         $this->config = $config;
-    }
-
-    public function uri()
-    {
-        $options = $this->option();
-        $options = is_array($options) ? $options : [];
-        foreach ($options as $key => $value) {
-            if(!in_array($key, ['host', 'port', 'username', 'secret']) || empty($value)) {
-                unset($options[$key]);
-            }
-        }
-        $options = array_merge($this->config, $options);
-        extract($options);
-        $host = isset($host) ? $host : '127.0.0.1';
-        $schema = parse_url($host, PHP_URL_SCHEME);
-        $schema = $schema ? $schema : 'tcp';
-        $port = isset($port) ? $port : 5038;
-        $username = isset($username) ? $username : null;
-        $secret = isset($secret) ? $secret : null;
-        $auth = '';
-        if($username && $secret) {
-            $auth = "{$username}:{$secret}@";
-        }
-        return "{$schema}://{$auth}{$host}:{$port}";
     }
 
     /**
@@ -67,7 +43,7 @@ abstract class AmiAbstract extends Command
      */
     public function handle()
     {
-        $client = $this->connector->createClient($this->uri());
+        $client = $this->connector->create($this->config);
         $client->then([$this, 'client'], [$this, 'writeException']);
         $this->loop->run();
     }
@@ -81,14 +57,12 @@ abstract class AmiAbstract extends Command
     public function writeException(Exception $e)
     {
         $this->warn($e->getMessage());
-        if (!($e instanceof UnexpectedValueException)) {
-            $this->stop();
-        }
+        $this->stop();
     }
 
     public function writeResponse(Response $response)
     {
-        $message = array_get($response->getFields(), 'Message', null);
+        $message = Arr::get($response->getFields(), 'Message', null);
         $this->line($message);
         $this->stop();
     }

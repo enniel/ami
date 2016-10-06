@@ -3,6 +3,7 @@
 namespace Enniel\Ami\Commands;
 
 use Clue\React\Ami\Client;
+use Illuminate\Support\Arr;
 
 class AmiAction extends AmiAbstract
 {
@@ -35,8 +36,8 @@ class AmiAction extends AmiAbstract
         $options = [];
         foreach ($arguments as $value) {
             $array = explode(':', $value);
-            if ($key = array_get($array, 0, null)) {
-                $value = array_get($array, 1, '');
+            if ($key = Arr::get($array, 0, null)) {
+                $value = Arr::get($array, 1, '');
                 $options[$key] = $value;
             }
         }

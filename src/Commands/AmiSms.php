@@ -3,6 +3,7 @@
 namespace Enniel\Ami\Commands;
 
 use Clue\React\Ami\Client;
+use Illuminate\Support\Arr;
 use jackkum\PHPPDU\Submit;
 use Clue\React\Ami\Protocol\Response;
 
@@ -59,7 +60,7 @@ class AmiSms extends AmiAbstract
             ]);
         }
         $promise = \React\Promise\map($promises, function (Response $response) {
-            $message = array_get($response->getFields(), 'Message', null);
+            $message = Arr::get($response->getFields(), 'Message', null);
             $this->line($message);
         });
         $promise->then([$this, 'stop'], [$this, 'writeException']);

@@ -2,42 +2,21 @@
 
 namespace Enniel\Ami\Providers;
 
+use React\Dns\Resolver\Factory as DnsResolver;
+use React\SocketClient\ConnectorInterface;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Config\Repository;
-use Enniel\Ami\Commands\AmiListen;
-use Enniel\Ami\Commands\AmiCli;
-use Enniel\Ami\Commands\AmiAction;
-use Enniel\Ami\Commands\AmiSms;
-use Enniel\Ami\Commands\AmiUssd;
 use React\EventLoop\StreamSelectLoop;
 use React\EventLoop\LoopInterface;
-use Clue\React\Ami\Factory;
+use Enniel\Ami\Commands\AmiListen;
+use Enniel\Ami\Commands\AmiAction;
+use React\SocketClient\Connector;
+use Enniel\Ami\Commands\AmiUssd;
+use Enniel\Ami\Commands\AmiSms;
+use Enniel\Ami\Commands\AmiCli;
+use Enniel\Ami\Factory;
 
 class AmiServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
-    /**
-     * Deferred providers.
-     *
-     * @var array
-     */
-    protected $providers = [
-        'command.ami.listen',
-        'command.ami.cli',
-        'command.ami.action',
-        'command.ami.dongle.sms',
-        'command.ami.dongle.ussd',
-        'ami.eventloop',
-        'ami.connector',
-        'ami.config',
-    ];
-
     /**
      * Perform post-registration booting of services.
      */
@@ -55,14 +34,21 @@ class AmiServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
-        $this->registerConfigRepository();
         $this->registerEventLoop();
         $this->registerConnector();
+        $this->registerFactory();
+        $this->registerDongleUssd();
         $this->registerAmiListen();
-        $this->registerAmiCli();
         $this->registerAmiAction();
         $this->registerDongleSms();
-        $this->registerDongleUssd();
+        $this->registerAmiCli();
+        $this->commands([
+            'command.ami.dongle.ussd',
+            'command.ami.dongle.sms',
+            'command.ami.listen',
+            'command.ami.action',
+            'command.ami.cli',
+        ]);
     }
 
     /**
@@ -74,24 +60,14 @@ class AmiServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the configuration repository.
-     */
-    protected function registerConfigRepository()
-    {
-        $this->app->singleton('ami.config', function() {
-            return new Repository(config('ami'));
-        });
-    }
-
-    /**
      * Register the ami listen command.
      */
     protected function registerAmiListen()
     {
-        $this->app->singleton('command.ami.listen', function ($app) {
-            return new AmiListen($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
+        $this->app->singleton(AmiListen::class, function ($app) {
+            return new AmiListen($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
         });
-        $this->commands('command.ami.listen');
+        $this->app->alias(AmiListen::class, 'command.ami.listen');
     }
 
     /**
@@ -99,10 +75,10 @@ class AmiServiceProvider extends ServiceProvider
      */
     protected function registerAmiCli()
     {
-        $this->app->singleton('command.ami.cli', function ($app) {
-            return new AmiCli($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
+        $this->app->singleton(AmiCli::class, function ($app) {
+            return new AmiCli($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
         });
-        $this->commands('command.ami.cli');
+        $this->app->alias(AmiCli::class, 'command.ami.cli');
     }
 
     /**
@@ -110,10 +86,10 @@ class AmiServiceProvider extends ServiceProvider
      */
     protected function registerAmiAction()
     {
-        $this->app->singleton('command.ami.action', function ($app) {
-            return new AmiAction($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
+        $this->app->singleton(AmiAction::class, function ($app) {
+            return new AmiAction($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
         });
-        $this->commands('command.ami.action');
+        $this->app->alias(AmiAction::class, 'command.ami.action');
     }
 
     /**
@@ -121,10 +97,10 @@ class AmiServiceProvider extends ServiceProvider
      */
     protected function registerDongleSms()
     {
-        $this->app->singleton('command.ami.dongle.sms', function ($app) {
-            return new AmiSms($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
+        $this->app->singleton(AmiSms::class, function ($app) {
+            return new AmiSms($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
         });
-        $this->commands('command.ami.dongle.sms');
+        $this->app->alias(AmiSms::class, 'command.ami.dongle.sms');
     }
 
     /**
@@ -132,10 +108,10 @@ class AmiServiceProvider extends ServiceProvider
      */
     protected function registerDongleUssd()
     {
-        $this->app->singleton('command.ami.dongle.ussd', function ($app) {
-            return new AmiUssd($app->make('ami.eventloop'), $app->make('ami.connector'), $app->make('ami.config'));
+        $this->app->singleton(AmiUssd::class, function ($app) {
+            return new AmiUssd($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
         });
-        $this->commands('command.ami.dongle.ussd');
+        $this->app->alias(AmiUssd::class, 'command.ami.dongle.ussd');
     }
 
     /**
@@ -143,10 +119,10 @@ class AmiServiceProvider extends ServiceProvider
      */
     protected function registerEventLoop()
     {
-        $this->app->singleton('ami.eventloop', function () {
+        $this->app->singleton(LoopInterface::class, function () {
             return new StreamSelectLoop();
         });
-        $this->app->bind(LoopInterface::class, StreamSelectLoop::class);
+        $this->app->alias(LoopInterface::class, 'ami.eventloop');
     }
 
     /**
@@ -154,18 +130,21 @@ class AmiServiceProvider extends ServiceProvider
      */
     protected function registerConnector()
     {
-        $this->app->singleton('ami.connector', function ($app) {
-            return new Factory($app->make('ami.eventloop'));
+        $this->app->singleton(ConnectorInterface::class, function ($app) {
+            $loop = $app[LoopInterface::class];
+            return new Connector($loop, (new DnsResolver())->create('8.8.8.8', $loop));
         });
+        $this->app->alias(ConnectorInterface::class, 'ami.connector');
     }
 
     /**
-     * Get the services provided by the provider.
-     *
-     * @return array
+     * Register factory.
      */
-    public function provides()
+    protected function registerFactory()
     {
-        return $this->providers;
+        $this->app->singleton(Factory::class, function ($app) {
+            return new Factory($app[LoopInterface::class], $app[ConnectorInterface::class]);
+        });
+        $this->app->alias(Factory::class, 'ami.factory');
     }
 }
