@@ -2,12 +2,12 @@
 
 namespace Enniel\Ami\Tests;
 
-use React\SocketClient\ConnectorInterface;
-use React\Promise\FulfilledPromise;
-use React\EventLoop\LoopInterface;
-use React\Stream\Stream;
 use Clue\React\Ami\Client;
 use Enniel\Ami\Parser;
+use React\EventLoop\LoopInterface;
+use React\Promise\FulfilledPromise;
+use React\SocketClient\ConnectorInterface;
+use React\Stream\Stream;
 
 class Factory extends \Enniel\Ami\Factory
 {
@@ -23,9 +23,10 @@ class Factory extends \Enniel\Ami\Factory
     }
 
     /**
-     * Create client
+     * Create client.
      *
-     * @param  array $options
+     * @param array $options
+     *
      * @return \React\Promise\Promise
      */
     public function create(array $options = [])

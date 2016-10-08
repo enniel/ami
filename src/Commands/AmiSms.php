@@ -3,9 +3,9 @@
 namespace Enniel\Ami\Commands;
 
 use Clue\React\Ami\Client;
+use Clue\React\Ami\Protocol\Response;
 use Illuminate\Support\Arr;
 use jackkum\PHPPDU\Submit;
-use Clue\React\Ami\Protocol\Response;
 
 class AmiSms extends AmiAbstract
 {
@@ -35,14 +35,15 @@ class AmiSms extends AmiAbstract
     protected function getDevice()
     {
         $device = $this->argument('device');
+
         return $device ? $device : array_get($this->config, 'dongle.sms.device');
     }
 
     public function sendSms()
     {
         $this->request('DongleSendSms', [
-            'Device' => $this->getDevice(),
-            'Number' => $this->argument('number'),
+            'Device'  => $this->getDevice(),
+            'Number'  => $this->argument('number'),
             'Message' => $this->argument('message'),
         ])->then([$this, 'writeResponse'], [$this, 'writeException']);
     }
@@ -56,7 +57,7 @@ class AmiSms extends AmiAbstract
         foreach ($pdu->getParts() as $part) {
             $promises[] = $this->request('DongleSendPdu', [
                 'Device' => $this->getDevice(),
-                'PDU' => (string) $part,
+                'PDU'    => (string) $part,
             ]);
         }
         $promise = \React\Promise\map($promises, function (Response $response) {

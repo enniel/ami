@@ -2,12 +2,12 @@
 
 namespace Enniel\Ami;
 
-use React\SocketClient\ConnectorInterface;
-use React\EventLoop\LoopInterface;
 use Clue\React\Ami\ActionSender;
-use Illuminate\Support\Arr;
-use React\Stream\Stream;
 use Clue\React\Ami\Client;
+use Illuminate\Support\Arr;
+use React\EventLoop\LoopInterface;
+use React\SocketClient\ConnectorInterface;
+use React\Stream\Stream;
 
 class Factory
 {
@@ -32,9 +32,10 @@ class Factory
     }
 
     /**
-     * Create client
+     * Create client.
      *
-     * @param  array $options
+     * @param array $options
+     *
      * @return \React\Promise\Promise
      */
     public function create(array $options = [])
@@ -48,6 +49,7 @@ class Factory
         if (!is_null($options['username'])) {
             $promise = $promise->then(function (Client $client) use ($options) {
                 $sender = new ActionSender($client);
+
                 return $sender->login($options['username'], $options['secret'])->then(
                     function () use ($client) {
                         return $client;
@@ -61,6 +63,7 @@ class Factory
                 throw $error;
             });
         }
+
         return $promise;
     }
 }
