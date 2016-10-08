@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=5.6.0",
         "ext-mbstring": "*",
         "illuminate/support": "~5.1",
         "illuminate/console": "~5.1",
@@ -24,7 +24,7 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "~2.7",
-        "phpunit/phpunit": "~5.5",
+        "phpunit/phpunit": "~4.8|~5.0",
         "orchestra/testbench": "~3.0"
     },
     "autoload": {
