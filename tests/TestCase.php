@@ -18,7 +18,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected $stream;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $running;
 
@@ -38,9 +38,9 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->loop   = $this->app[LoopInterface::class];
+        $this->loop = $this->app[LoopInterface::class];
         $this->loop->nextTick(function () {
-            if (! $this->running) {
+            if (!$this->running) {
                 $this->loop->stop();
             }
         });

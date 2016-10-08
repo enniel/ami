@@ -2,8 +2,8 @@
 
 namespace Enniel\Ami\Tests;
 
-use Illuminate\Support\Facades\Event as Emitter;
 use Clue\React\Ami\Protocol\Event;
+use Illuminate\Support\Facades\Event as Emitter;
 use React\Stream\Stream;
 
 class EventTest extends TestCase
