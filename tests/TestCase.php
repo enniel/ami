@@ -2,13 +2,12 @@
 
 namespace Enniel\Ami\Tests;
 
-use Illuminate\Container\Container;
 use Illuminate\Config\Repository;
+use Illuminate\Console\Application as Console;
+use Illuminate\Container\Container;
 use Illuminate\Events\EventServiceProvider;
-use Enniel\Ami\Tests\AmiServiceProvider;
 use React\EventLoop\LoopInterface;
 use React\Stream\Stream;
-use Illuminate\Console\Application as Console;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -53,7 +52,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Call console command
+     * Call console command.
      *
      * @param string $command
      */
