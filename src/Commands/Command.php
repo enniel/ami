@@ -3,7 +3,6 @@
 namespace Enniel\Ami\Commands;
 
 use Illuminate\Console\Parser;
-use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
