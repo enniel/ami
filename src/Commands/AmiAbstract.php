@@ -6,9 +6,9 @@ use Clue\React\Ami\Client;
 use Clue\React\Ami\Protocol\Response;
 use Enniel\Ami\Factory;
 use Exception;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Arr;
 use React\EventLoop\LoopInterface;
-use Illuminate\Events\Dispatcher;
 
 abstract class AmiAbstract extends Command
 {
