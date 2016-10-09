@@ -2,8 +2,6 @@
 
 namespace Enniel\Ami\Commands;
 
-use Illuminate\Console\Command;
-
 class AmiUssd extends Command
 {
     /**

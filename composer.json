@@ -20,6 +20,7 @@
         "illuminate/support": "~5.1",
         "illuminate/console": "~5.1",
         "illuminate/events": "~5.1",
+        "illuminate/contracts": "~5.1",
         "clue/ami-react": "dev-master",
         "jackkum/phppdu": "~1.2"
     },
