@@ -3,8 +3,6 @@
 namespace Enniel\Ami\Tests;
 
 use Clue\React\Ami\Protocol\Event;
-use Illuminate\Support\Facades\Event as Emitter;
-use React\Stream\Stream;
 
 class EventTest extends TestCase
 {
@@ -85,7 +83,7 @@ class EventTest extends TestCase
                 'Uniqueid2' => '1094154427.11',
             ],
         ];
-        Emitter::listen('ami.listen.started', function () use ($messages) {
+        $this->events->listen('ami.listen.started', function () use ($messages) {
             $this->assertTrue(true);
             $this->stream->emit('data', ["Asterisk Call Manager/1.3\r\n"]);
             foreach ($messages as $lines) {
@@ -96,7 +94,7 @@ class EventTest extends TestCase
                 $this->stream->emit('data', ["{$message}\r\n"]);
             }
         });
-        Emitter::listen('ami.events.agent_connect', function (Event $event) {
+        $this->events->listen('ami.events.agent_connect', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event'          => 'AgentConnect',
                 'Privilege'      => 'agent,all',
@@ -111,7 +109,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'AgentConnect');
         });
-        Emitter::listen('ami.events.agent_complete', function (Event $event) {
+        $this->events->listen('ami.events.agent_complete', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event'      => 'AgentComplete',
                 'Privilege'  => 'agent,all',
@@ -126,7 +124,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'AgentComplete');
         });
-        Emitter::listen('ami.events.bridge', function (Event $event) {
+        $this->events->listen('ami.events.bridge', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event'       => 'Bridge',
                 'Privilege'   => 'call,all',
@@ -141,7 +139,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'Bridge');
         });
-        Emitter::listen('ami.events.dial', function (Event $event) {
+        $this->events->listen('ami.events.dial', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event'        => 'Dial',
                 'Privilege'    => 'call,all',
@@ -156,7 +154,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'Dial');
         });
-        Emitter::listen('ami.events.fully_booted', function (Event $event) {
+        $this->events->listen('ami.events.fully_booted', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event'     => 'FullyBooted',
                 'Privilege' => 'system,all',
@@ -164,7 +162,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'FullyBooted');
         });
-        Emitter::listen('ami.events.join', function (Event $event) {
+        $this->events->listen('ami.events.join', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event'             => 'Join',
                 'Privilege'         => 'call,all',
@@ -180,7 +178,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'Join');
         });
-        Emitter::listen('ami.events.link', function (Event $event) {
+        $this->events->listen('ami.events.link', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event'     => 'Link',
                 'Channel1'  => 'SIP/101-3f3f',
@@ -192,6 +190,6 @@ class EventTest extends TestCase
             $this->running = false;
         });
         $this->running = true;
-        $this->artisan('ami:listen');
+        $this->console('ami:listen');
     }
 }

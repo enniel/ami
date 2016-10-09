@@ -65,7 +65,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerAmiListen()
     {
         $this->app->singleton(AmiListen::class, function ($app) {
-            return new AmiListen($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
+            return new AmiListen($app['events'], $app['ami.eventloop'], $app['ami.factory'], $app['config']['ami']);
         });
         $this->app->alias(AmiListen::class, 'command.ami.listen');
     }
@@ -76,7 +76,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerAmiCli()
     {
         $this->app->singleton(AmiCli::class, function ($app) {
-            return new AmiCli($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
+            return new AmiCli($app['events'], $app['ami.eventloop'], $app['ami.factory'], $app['config']['ami']);
         });
         $this->app->alias(AmiCli::class, 'command.ami.cli');
     }
@@ -87,7 +87,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerAmiAction()
     {
         $this->app->singleton(AmiAction::class, function ($app) {
-            return new AmiAction($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
+            return new AmiAction($app['events'], $app['ami.eventloop'], $app['ami.factory'], $app['config']['ami']);
         });
         $this->app->alias(AmiAction::class, 'command.ami.action');
     }
@@ -98,7 +98,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerDongleSms()
     {
         $this->app->singleton(AmiSms::class, function ($app) {
-            return new AmiSms($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
+            return new AmiSms($app['events'], $app['ami.eventloop'], $app['ami.factory'], $app['config']['ami']);
         });
         $this->app->alias(AmiSms::class, 'command.ami.dongle.sms');
     }
@@ -109,7 +109,7 @@ class AmiServiceProvider extends ServiceProvider
     protected function registerDongleUssd()
     {
         $this->app->singleton(AmiUssd::class, function ($app) {
-            return new AmiUssd($app[LoopInterface::class], $app[Factory::class], $app['config']['ami']);
+            return new AmiUssd();
         });
         $this->app->alias(AmiUssd::class, 'command.ami.dongle.ussd');
     }

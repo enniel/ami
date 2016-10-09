@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use React\EventLoop\LoopInterface;
+use Illuminate\Events\Dispatcher;
 
 abstract class AmiAbstract extends Command
 {
@@ -22,7 +23,9 @@ abstract class AmiAbstract extends Command
 
     protected $events;
 
-    public function __construct(LoopInterface $loop, Factory $connector, array $config = [])
+    protected $dispatcher;
+
+    public function __construct(Dispatcher $dispatcher, LoopInterface $loop, Factory $connector, array $config = [])
     {
         parent::__construct();
         $this->loop = $loop;
@@ -34,6 +37,7 @@ abstract class AmiAbstract extends Command
         }
         $this->events = $events;
         $this->config = $config;
+        $this->dispatcher = $dispatcher;
     }
 
     /**

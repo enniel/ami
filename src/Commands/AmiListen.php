@@ -5,7 +5,6 @@ namespace Enniel\Ami\Commands;
 use Clue\React\Ami\Client;
 use Clue\React\Ami\Protocol\Event;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Event as Emitter;
 
 class AmiListen extends AmiAbstract
 {
@@ -53,9 +52,9 @@ class AmiListen extends AmiAbstract
         $handler = Arr::get($this->events, $name.'.handler');
         $options = Arr::get($this->events, $name.'.options', []);
         $params = [$event, $options];
-        Emitter::fire('ami.events.*', $params);
+        $this->dispatcher->fire('ami.events.*', $params);
         if ($handler) {
-            Emitter::fire('ami.events.'.$handler, $params);
+            $this->dispatcher->fire('ami.events.'.$handler, $params);
         }
     }
 
@@ -71,6 +70,6 @@ class AmiListen extends AmiAbstract
             $this->info('closed listen ami');
         });
         $client->on('event', [$this, 'eventEmitter']);
-        Emitter::fire('ami.listen.started', [$this, $client]);
+        $this->dispatcher->fire('ami.listen.started', [$this, $client]);
     }
 }

@@ -2,10 +2,15 @@
 
 namespace Enniel\Ami\Tests;
 
+use Illuminate\Container\Container;
+use Illuminate\Config\Repository;
+use Illuminate\Events\EventServiceProvider;
+use Enniel\Ami\Tests\AmiServiceProvider;
 use React\EventLoop\LoopInterface;
 use React\Stream\Stream;
+use Illuminate\Console\Application as Console;
 
-abstract class TestCase extends \Orchestra\Testbench\TestCase
+abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \React\EventLoop\LoopInterface
@@ -23,27 +28,37 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected $running;
 
     /**
-     * {@inheritdoc}
+     * @var \Illuminate\Events\Dispatcher
      */
-    protected function getPackageProviders($app)
-    {
-        return [
-            \Enniel\Ami\Tests\AmiServiceProvider::class,
-        ];
-    }
+    protected $events;
 
     /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
-        parent::setUp();
-        $this->loop = $this->app[LoopInterface::class];
+        $app = new Container();
+        $app->instance('config', new Repository());
+        (new EventServiceProvider($app))->register();
+        (new AmiServiceProvider($app))->register();
+        $this->loop = $app[LoopInterface::class];
         $this->loop->nextTick(function () {
             if (!$this->running) {
                 $this->loop->stop();
             }
         });
-        $this->stream = $this->app[Stream::class];
+        $this->stream = $app[Stream::class];
+        $this->events = $app['events'];
+        $this->app = $app;
+    }
+
+    /**
+     * Call console command
+     *
+     * @param string $command
+     */
+    protected function console($command)
+    {
+        return (new Console($this->app, $this->events, '5.3'))->call($command);
     }
 }
