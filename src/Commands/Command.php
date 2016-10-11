@@ -407,7 +407,7 @@ class Command extends SymfonyCommand
      */
     public function info($string, $verbosity = null)
     {
-        $this->line($string, 'info', $verbosity);
+        $this->output->writeln("<info>$string</info>");
     }
 
     /**
@@ -421,9 +421,7 @@ class Command extends SymfonyCommand
      */
     public function line($string, $style = null, $verbosity = null)
     {
-        $styled = $style ? "<$style>$string</$style>" : $string;
-
-        $this->output->writeln($styled, $this->parseVerbosity($verbosity));
+        $this->output->writeln($string);
     }
 
     /**
@@ -436,7 +434,7 @@ class Command extends SymfonyCommand
      */
     public function comment($string, $verbosity = null)
     {
-        $this->line($string, 'comment', $verbosity);
+        $this->output->writeln("<comment>$string</comment>");
     }
 
     /**
@@ -449,7 +447,7 @@ class Command extends SymfonyCommand
      */
     public function question($string, $verbosity = null)
     {
-        $this->line($string, 'question', $verbosity);
+        $this->output->writeln("<question>$string</question>");
     }
 
     /**
@@ -462,7 +460,7 @@ class Command extends SymfonyCommand
      */
     public function error($string, $verbosity = null)
     {
-        $this->line($string, 'error', $verbosity);
+        $this->output->writeln("<error>$string</error>");
     }
 
     /**
@@ -481,7 +479,7 @@ class Command extends SymfonyCommand
             $this->output->getFormatter()->setStyle('warning', $style);
         }
 
-        $this->line($string, 'warning', $verbosity);
+        $this->output->writeln("<warning>$string</warning>");
     }
 
     /**
