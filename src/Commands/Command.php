@@ -96,7 +96,7 @@ class Command extends SymfonyCommand
 
         $this->setDescription($this->description);
 
-        if (!isset($this->signature)) {
+        if (! isset($this->signature)) {
             $this->specifyParameters();
         }
     }
@@ -473,7 +473,7 @@ class Command extends SymfonyCommand
      */
     public function warn($string, $verbosity = null)
     {
-        if (!$this->output->getFormatter()->hasStyle('warning')) {
+        if (! $this->output->getFormatter()->hasStyle('warning')) {
             $style = new OutputFormatterStyle('yellow');
 
             $this->output->getFormatter()->setStyle('warning', $style);
@@ -493,7 +493,7 @@ class Command extends SymfonyCommand
     {
         if (isset($this->verbosityMap[$level])) {
             $level = $this->verbosityMap[$level];
-        } elseif (!is_int($level)) {
+        } elseif (! is_int($level)) {
             $level = $this->verbosity;
         }
 

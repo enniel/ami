@@ -46,7 +46,7 @@ class Factory
         $promise = $this->connector->create($options['host'], $options['port'])->then(function (Stream $stream) {
             return new Client($stream, new Parser());
         });
-        if (!is_null($options['username'])) {
+        if (! is_null($options['username'])) {
             $promise = $promise->then(function (Client $client) use ($options) {
                 $sender = new ActionSender($client);
 

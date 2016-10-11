@@ -38,7 +38,7 @@ class AmiCli extends AmiAbstract
         // client connected and authenticated
         $this->info('starting ami cli interface');
         $command = $this->argument('cli');
-        if (!empty($command)) {
+        if (! empty($command)) {
             $this->sendCommand($command);
         } else {
             $this->writeInterface();

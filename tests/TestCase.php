@@ -42,7 +42,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         (new AmiServiceProvider($app))->register();
         $this->loop = $app[LoopInterface::class];
         $this->loop->nextTick(function () {
-            if (!$this->running) {
+            if (! $this->running) {
                 $this->loop->stop();
             }
         });
