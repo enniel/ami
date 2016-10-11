@@ -52,6 +52,9 @@
         "phpunit": "php vendor/bin/phpunit",
         "phpcs": "php vendor/bin/phpcs"
     },
+    "bin": [
+        "bin/ami"
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "1.1-dev"

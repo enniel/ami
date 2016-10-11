@@ -21,7 +21,7 @@ Once it's installed, you can register the service provider in `config/app.php` i
 ]
 ```
 
-Then publish assets with `php artisan vendor:publish`. This will add the file `config/ami.php`. 
+Then publish assets with `php artisan vendor:publish`. This will add the file `config/ami.php`.
 
 Usage
 ----------------
@@ -120,4 +120,10 @@ Artisan::call('ami:cli', [
     'command'     => [command],
     '--autoclose' => true,
 ]);
+```
+
+**Without Laravel**
+
+```sh
+php ./vendor/bin/ami ami:listen --host=127.0.0.1 --port=5038 --username=username --secret=secret --monitor
 ```

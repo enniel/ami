@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+// include the composer autoloader
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Illuminate\Container\Container;
+use Illuminate\Console\Application;
+use Illuminate\Config\Repository;
+use Illuminate\Events\EventServiceProvider;
+use Enniel\Ami\Providers\AmiServiceProvider;
+
+$container = new Container();
+$container->instance('config', new Repository());
+(new EventServiceProvider($container))->register();
+(new AmiServiceProvider($container))->register();
+
+$app = new Application($container, $container['events'], null);
+$app->run();
