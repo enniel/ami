@@ -46,7 +46,11 @@ abstract class AmiAbstract extends Command
      */
     public function handle()
     {
-        $client = $this->connector->create($this->config);
+        $options = $this->options();
+        foreach (['host', 'port', 'username', 'secret'] as $key) {
+            $options[$key] = Arr::get($options, $key, Arr::get($this->config, $key, null));
+        }
+        $client = $this->connector->create($options);
         $client->then([$this, 'client'], [$this, 'writeException']);
         $this->loop->run();
     }
