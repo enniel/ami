@@ -59,6 +59,12 @@ return [
 
             ],
         ],
+        'CDR' => [
+            'handler' => 'cdr',
+            'options' => [
+
+            ],
+        ],
         'CEL' => [
             'handler' => 'cel',
             'options' => [
