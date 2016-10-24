@@ -4,6 +4,7 @@ namespace Enniel\Ami\Commands;
 
 use Clue\React\Ami\Client;
 use Clue\React\Ami\Protocol\Response;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Arr;
 use jackkum\PHPPDU\Submit;
 
@@ -61,6 +62,7 @@ class AmiSms extends AmiAbstract
             ]);
         }
         $promise = \React\Promise\map($promises, function (Response $response) {
+            Event::fire('ami.dongle.sms.sended', [$this, $response]);
             $message = Arr::get($response->getFields(), 'Message', null);
             $this->line($message);
         });
