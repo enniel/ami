@@ -25,7 +25,7 @@
         "react/stream": "~0.4.4",
         "react/event-loop": "~0.4.2",
         "react/socket-client": "~0.4.5",
-        "clue/ami-react": "dev-master",
+        "clue/ami-react": "~0.3.1",
         "jackkum/phppdu": "~1.2"
     },
     "require-dev": {
