@@ -3,10 +3,10 @@
 namespace Enniel\Ami\Tests;
 
 use Enniel\Ami\Factory;
-use Enniel\Ami\Tests\Factory as TestFactory;
+use React\Stream\Stream;
 use React\EventLoop\LoopInterface;
 use React\SocketClient\ConnectorInterface;
-use React\Stream\Stream;
+use Enniel\Ami\Tests\Factory as TestFactory;
 
 class AmiServiceProvider extends \Enniel\Ami\Providers\AmiServiceProvider
 {

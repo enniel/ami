@@ -2,18 +2,18 @@
 
 namespace Enniel\Ami\Providers;
 
-use Enniel\Ami\Commands\AmiAction;
+use Enniel\Ami\Factory;
 use Enniel\Ami\Commands\AmiCli;
-use Enniel\Ami\Commands\AmiListen;
 use Enniel\Ami\Commands\AmiSms;
 use Enniel\Ami\Commands\AmiUssd;
-use Enniel\Ami\Factory;
-use Illuminate\Support\ServiceProvider;
-use React\Dns\Resolver\Factory as DnsResolver;
+use React\SocketClient\Connector;
+use Enniel\Ami\Commands\AmiAction;
+use Enniel\Ami\Commands\AmiListen;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\StreamSelectLoop;
-use React\SocketClient\Connector;
+use Illuminate\Support\ServiceProvider;
 use React\SocketClient\ConnectorInterface;
+use React\Dns\Resolver\Factory as DnsResolver;
 
 class AmiServiceProvider extends ServiceProvider
 {

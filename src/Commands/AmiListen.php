@@ -3,8 +3,8 @@
 namespace Enniel\Ami\Commands;
 
 use Clue\React\Ami\Client;
-use Clue\React\Ami\Protocol\Event;
 use Illuminate\Support\Arr;
+use Clue\React\Ami\Protocol\Event;
 
 class AmiListen extends AmiAbstract
 {
