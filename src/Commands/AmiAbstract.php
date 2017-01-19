@@ -2,13 +2,13 @@
 
 namespace Enniel\Ami\Commands;
 
-use Clue\React\Ami\Client;
-use Clue\React\Ami\Protocol\Response;
-use Enniel\Ami\Factory;
 use Exception;
-use Illuminate\Events\Dispatcher;
+use Enniel\Ami\Factory;
+use Clue\React\Ami\Client;
 use Illuminate\Support\Arr;
+use Illuminate\Events\Dispatcher;
 use React\EventLoop\LoopInterface;
+use Clue\React\Ami\Protocol\Response;
 
 abstract class AmiAbstract extends Command
 {

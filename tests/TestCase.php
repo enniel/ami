@@ -2,12 +2,12 @@
 
 namespace Enniel\Ami\Tests;
 
+use React\Stream\Stream;
 use Illuminate\Config\Repository;
-use Illuminate\Console\Application as Console;
+use React\EventLoop\LoopInterface;
 use Illuminate\Container\Container;
 use Illuminate\Events\EventServiceProvider;
-use React\EventLoop\LoopInterface;
-use React\Stream\Stream;
+use Illuminate\Console\Application as Console;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {

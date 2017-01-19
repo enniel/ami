@@ -2,12 +2,12 @@
 
 namespace Enniel\Ami\Tests;
 
-use Clue\React\Ami\Client;
 use Enniel\Ami\Parser;
+use React\Stream\Stream;
+use Clue\React\Ami\Client;
 use React\EventLoop\LoopInterface;
 use React\Promise\FulfilledPromise;
 use React\SocketClient\ConnectorInterface;
-use React\Stream\Stream;
 
 class Factory extends \Enniel\Ami\Factory
 {
