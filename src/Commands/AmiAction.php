@@ -4,6 +4,7 @@ namespace Enniel\Ami\Commands;
 
 use Clue\React\Ami\Client;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class AmiAction extends AmiAbstract
 {
@@ -34,10 +35,15 @@ class AmiAction extends AmiAbstract
         $arguments = $this->option('arguments');
         $arguments = is_array($arguments) ? $arguments : [];
         $options = [];
-        foreach ($arguments as $value) {
-            $array = explode(':', $value);
-            if ($key = Arr::get($array, 0, null)) {
-                $value = Arr::get($array, 1, '');
+        $isAssoc = Arr::isAssoc($arguments);
+        foreach ($arguments as $key => $value) {
+            if (Str::contains($value, ':') && !$isAssoc) {
+                $array = explode(':', $value);
+                if ($key = Arr::get($array, 0)) {
+                    $value = Arr::get($array, 1, '');
+                    $options[$key] = $value;
+                }
+            } else {
                 $options[$key] = $value;
             }
         }
