@@ -20,9 +20,9 @@ class AmiSms extends AmiAbstract
                                 {--port= : Asterisk ami port}
                                 {--username= : Asterisk ami username}
                                 {--secret= : Asterisk ami secret key}
-                                {device : Device}
                                 {number : Phone number}
                                 {message? : Message text}
+                                {device? : Device}
                                 {--pdu : Use pdu mode}
                             ';
 
