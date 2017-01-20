@@ -69,29 +69,32 @@ Artisan::call('ami:action', [
 **Send sms messages using chan dongle**
 
 ```sh
-php artisan ami:dongle:sms <device> <phone> <message>
+php artisan ami:dongle:sms <phone> <message> <device?>
 ```
 
 ```php
 Artisan::call('ami:dongle:sms', [
-    'device'  => <device>,
     'phone'   => <phone>,
     'message' => <message>,
+    'device'  => <device?>,
 ]);
 ```
 For sending long messages use *pdu* mode.
 ```sh
-php artisan ami:dongle:sms <device> <phone> <message> --pdu
+php artisan ami:dongle:sms <phone> <message> <device?> --pdu
 ```
 
 ```php
 Artisan::call('ami:dongle:sms', [
-    'device'  => <device>,
     'phone'   => <phone>,
     'message' => <message>,
+    'device'  => <device?>,
     '--pdu'   => true,
 ]);
 ```
+
+Argument device is not required.
+
 **Send ussd commands using chan dongle**
 
 ```sh
