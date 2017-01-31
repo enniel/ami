@@ -28,7 +28,7 @@ class AmiUssd extends Command
     public function handle()
     {
         $this->call('ami:action', [
-            'action'      => 'DongleSendUSSD',
+            'action' => 'DongleSendUSSD',
             '--arguments' => [
                 "Device:{$this->argument('device')}",
                 "USSD:{$this->argument('ussd')}",

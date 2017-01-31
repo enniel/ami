@@ -22,7 +22,6 @@ class AmiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
         $this->publishes([
             realpath(__DIR__.'/../../config/ami.php') => config_path('ami.php'),
         ], 'ami');

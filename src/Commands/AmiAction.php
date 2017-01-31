@@ -37,7 +37,7 @@ class AmiAction extends AmiAbstract
         $options = [];
         $isAssoc = Arr::isAssoc($arguments);
         foreach ($arguments as $key => $value) {
-            if (Str::contains($value, ':') && ! $isAssoc) {
+            if (Str::contains($value, ':') && !$isAssoc) {
                 $array = explode(':', $value);
                 if ($key = Arr::get($array, 0)) {
                     $value = Arr::get($array, 1, '');

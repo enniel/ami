@@ -71,17 +71,15 @@ class Command extends SymfonyCommand
      * @var array
      */
     protected $verbosityMap = [
-        'v'      => OutputInterface::VERBOSITY_VERBOSE,
-        'vv'     => OutputInterface::VERBOSITY_VERY_VERBOSE,
-        'vvv'    => OutputInterface::VERBOSITY_DEBUG,
-        'quiet'  => OutputInterface::VERBOSITY_QUIET,
+        'v' => OutputInterface::VERBOSITY_VERBOSE,
+        'vv' => OutputInterface::VERBOSITY_VERY_VERBOSE,
+        'vvv' => OutputInterface::VERBOSITY_DEBUG,
+        'quiet' => OutputInterface::VERBOSITY_QUIET,
         'normal' => OutputInterface::VERBOSITY_NORMAL,
     ];
 
     /**
      * Create a new console command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -96,15 +94,13 @@ class Command extends SymfonyCommand
 
         $this->setDescription($this->description);
 
-        if (! isset($this->signature)) {
+        if (!isset($this->signature)) {
             $this->specifyParameters();
         }
     }
 
     /**
      * Configure the console command using a fluent definition.
-     *
-     * @return void
      */
     protected function configureUsingFluentDefinition()
     {
@@ -123,8 +119,6 @@ class Command extends SymfonyCommand
 
     /**
      * Specify the arguments and options on the command.
-     *
-     * @return void
      */
     protected function specifyParameters()
     {
@@ -383,8 +377,6 @@ class Command extends SymfonyCommand
      * @param array                                         $headers
      * @param \Illuminate\Contracts\Support\Arrayable|array $rows
      * @param string                                        $style
-     *
-     * @return void
      */
     public function table(array $headers, $rows, $style = 'default')
     {
@@ -402,8 +394,6 @@ class Command extends SymfonyCommand
      *
      * @param string          $string
      * @param null|int|string $verbosity
-     *
-     * @return void
      */
     public function info($string, $verbosity = null)
     {
@@ -416,8 +406,6 @@ class Command extends SymfonyCommand
      * @param string          $string
      * @param string          $style
      * @param null|int|string $verbosity
-     *
-     * @return void
      */
     public function line($string, $style = null, $verbosity = null)
     {
@@ -429,8 +417,6 @@ class Command extends SymfonyCommand
      *
      * @param string          $string
      * @param null|int|string $verbosity
-     *
-     * @return void
      */
     public function comment($string, $verbosity = null)
     {
@@ -442,8 +428,6 @@ class Command extends SymfonyCommand
      *
      * @param string          $string
      * @param null|int|string $verbosity
-     *
-     * @return void
      */
     public function question($string, $verbosity = null)
     {
@@ -455,8 +439,6 @@ class Command extends SymfonyCommand
      *
      * @param string          $string
      * @param null|int|string $verbosity
-     *
-     * @return void
      */
     public function error($string, $verbosity = null)
     {
@@ -468,12 +450,10 @@ class Command extends SymfonyCommand
      *
      * @param string          $string
      * @param null|int|string $verbosity
-     *
-     * @return void
      */
     public function warn($string, $verbosity = null)
     {
-        if (! $this->output->getFormatter()->hasStyle('warning')) {
+        if (!$this->output->getFormatter()->hasStyle('warning')) {
             $style = new OutputFormatterStyle('yellow');
 
             $this->output->getFormatter()->setStyle('warning', $style);
@@ -493,7 +473,7 @@ class Command extends SymfonyCommand
     {
         if (isset($this->verbosityMap[$level])) {
             $level = $this->verbosityMap[$level];
-        } elseif (! is_int($level)) {
+        } elseif (!is_int($level)) {
             $level = $this->verbosity;
         }
 
@@ -504,8 +484,6 @@ class Command extends SymfonyCommand
      * Set the verbosity level.
      *
      * @param string|int $level
-     *
-     * @return void
      */
     protected function setVerbosity($level)
     {
@@ -556,8 +534,6 @@ class Command extends SymfonyCommand
      * Set the Laravel application instance.
      *
      * @param \Illuminate\Contracts\Container\Container $laravel
-     *
-     * @return void
      */
     public function setLaravel($laravel)
     {

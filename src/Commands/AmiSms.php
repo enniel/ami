@@ -43,8 +43,8 @@ class AmiSms extends AmiAbstract
     public function sendSms()
     {
         $this->request('DongleSendSms', [
-            'Device'  => $this->getDevice(),
-            'Number'  => $this->argument('number'),
+            'Device' => $this->getDevice(),
+            'Number' => $this->argument('number'),
             'Message' => $this->argument('message'),
         ])->then([$this, 'writeResponse'], [$this, 'writeException']);
     }
@@ -58,7 +58,7 @@ class AmiSms extends AmiAbstract
         foreach ($pdu->getParts() as $part) {
             $promises[] = $this->request('DongleSendPdu', [
                 'Device' => $this->getDevice(),
-                'PDU'    => (string) $part,
+                'PDU' => (string) $part,
             ]);
         }
         $promise = \React\Promise\map($promises, function (Response $response) {
