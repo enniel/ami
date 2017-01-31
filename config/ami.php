@@ -141,6 +141,11 @@ return [
             'options' => [
             ],
         ],
+        'DonglePortFail' => [
+            'handler' => 'dongle_port_fail',
+            'options' => [
+            ],
+        ],
         'ExtensionStatus' => [
             'handler' => 'extension_status',
             'options' => [

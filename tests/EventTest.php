@@ -82,6 +82,12 @@ class EventTest extends TestCase
                 'Uniqueid1' => '1094154427.10',
                 'Uniqueid2' => '1094154427.11',
             ],
+            [
+                'Event' => 'DonglePortFail',
+                'Privilege' => 'call,all',
+                'Device' => '/dev/ttyUSB8',
+                'Message' => 'Response Failed',
+            ],
         ];
         $this->events->listen('ami.listen.started', function () use ($messages) {
             $this->assertTrue(true);
@@ -187,6 +193,15 @@ class EventTest extends TestCase
                 'Uniqueid2' => '1094154427.11',
             ]);
             $this->assertEquals($event->getName(), 'Link');
+        });
+        $this->events->listen('ami.events.dongle_port_fail', function (Event $event) {
+            $this->assertEquals($event->getFields(), [
+                'Event' => 'DonglePortFail',
+                'Privilege' => 'call,all',
+                'Device' => '/dev/ttyUSB8',
+                'Message' => 'Response Failed',
+            ]);
+            $this->assertEquals($event->getName(), 'DonglePortFail');
             $this->running = false;
         });
         $this->running = true;
