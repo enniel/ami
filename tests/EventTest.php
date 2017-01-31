@@ -100,7 +100,7 @@ class EventTest extends TestCase
                 $this->stream->emit('data', ["{$message}\r\n"]);
             }
         });
-        $this->events->listen('ami.events.agent_connect', function (Event $event) {
+        $this->events->listen('ami.events.AgentConnect', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event' => 'AgentConnect',
                 'Privilege' => 'agent,all',
@@ -115,7 +115,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'AgentConnect');
         });
-        $this->events->listen('ami.events.agent_complete', function (Event $event) {
+        $this->events->listen('ami.events.AgentComplete', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event' => 'AgentComplete',
                 'Privilege' => 'agent,all',
@@ -130,7 +130,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'AgentComplete');
         });
-        $this->events->listen('ami.events.bridge', function (Event $event) {
+        $this->events->listen('ami.events.Bridge', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event' => 'Bridge',
                 'Privilege' => 'call,all',
@@ -145,7 +145,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'Bridge');
         });
-        $this->events->listen('ami.events.dial', function (Event $event) {
+        $this->events->listen('ami.events.Dial', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event' => 'Dial',
                 'Privilege' => 'call,all',
@@ -160,7 +160,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'Dial');
         });
-        $this->events->listen('ami.events.fully_booted', function (Event $event) {
+        $this->events->listen('ami.events.FullyBooted', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event' => 'FullyBooted',
                 'Privilege' => 'system,all',
@@ -168,7 +168,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'FullyBooted');
         });
-        $this->events->listen('ami.events.join', function (Event $event) {
+        $this->events->listen('ami.events.Join', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event' => 'Join',
                 'Privilege' => 'call,all',
@@ -184,7 +184,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'Join');
         });
-        $this->events->listen('ami.events.link', function (Event $event) {
+        $this->events->listen('ami.events.Link', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event' => 'Link',
                 'Channel1' => 'SIP/101-3f3f',
@@ -194,7 +194,7 @@ class EventTest extends TestCase
             ]);
             $this->assertEquals($event->getName(), 'Link');
         });
-        $this->events->listen('ami.events.dongle_port_fail', function (Event $event) {
+        $this->events->listen('ami.events.DonglePortFail', function (Event $event) {
             $this->assertEquals($event->getFields(), [
                 'Event' => 'DonglePortFail',
                 'Privilege' => 'call,all',

@@ -48,14 +48,11 @@ class AmiListen extends AmiAbstract
 
     public function eventEmitter(Event $event)
     {
-        $name = mb_strtolower($event->getName());
-        $handler = Arr::get($this->events, $name.'.handler');
-        $options = Arr::get($this->events, $name.'.options', []);
+        $name = $event->getName();
+        $options = Arr::get($this->events, $name, []);
         $params = [$event, $options];
         $this->dispatcher->fire('ami.events.*', $params);
-        if ($handler) {
-            $this->dispatcher->fire('ami.events.'.$handler, $params);
-        }
+        $this->dispatcher->fire('ami.events.'.$name, $params);
     }
 
     public function client(Client $client)

@@ -29,12 +29,7 @@ abstract class AmiAbstract extends Command
         parent::__construct();
         $this->loop = $loop;
         $this->connector = $connector;
-        $events = [];
-        foreach (Arr::get($config, 'events', []) as $key => $value) {
-            $key = mb_strtolower($key);
-            $events[$key] = $value;
-        }
-        $this->events = $events;
+        $this->events = Arr::get($config, 'events', []);
         $this->config = $config;
         $this->dispatcher = $dispatcher;
     }
