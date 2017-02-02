@@ -100,6 +100,16 @@ class Command extends SymfonyCommand
     }
 
     /**
+     * Determine if we are running in the console.
+     *
+     * @return bool
+     */
+    public function runningInConsole()
+    {
+        return php_sapi_name() == 'cli';
+    }
+
+    /**
      * Configure the console command using a fluent definition.
      */
     protected function configureUsingFluentDefinition()
