@@ -55,9 +55,10 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      * Call console command.
      *
      * @param string $command
+     * @param array  $options
      */
-    protected function console($command)
+    protected function console($command, array $options = [])
     {
-        return (new Console($this->app, $this->events, '5.3'))->call($command);
+        return (new Console($this->app, $this->events, '5.3'))->call($command, $options);
     }
 }
