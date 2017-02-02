@@ -2,9 +2,11 @@
 
 namespace Enniel\Ami\Commands;
 
+use Exception;
 use Clue\React\Ami\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Clue\React\Ami\Protocol\Response;
 
 class AmiAction extends AmiAbstract
 {
@@ -29,6 +31,11 @@ class AmiAction extends AmiAbstract
      */
     protected $description = 'Send action from asterisk ami';
 
+    protected $headers = [
+        'Field',
+        'Value',
+    ];
+
     public function client(Client $client)
     {
         parent::client($client);
@@ -48,6 +55,33 @@ class AmiAction extends AmiAbstract
             }
         }
 
-        $this->request($this->argument('action'), $options)->then([$this, 'writeResponse'], [$this, 'writeException']);
+        $action = $this->argument('action');
+        $request = $this->request($action, $options);
+
+        $this->dispatcher->fire('ami.action.sended', [$this, $action, $request]);
+
+        $request->then(
+            function (Response $response) use ($action) {
+                $this->dispatcher->fire('ami.action.responsed', [$this, $action, $response]);
+                if ($this->runningInConsole()) {
+                    $this->responseMonitor($response);
+                }
+                $this->stop();
+            },
+            function (Exception $exception) {
+                throw $exception;
+            });
+    }
+
+    public function responseMonitor(Response $response)
+    {
+        $fields = [];
+        foreach ($response->getFields() as $key => $value) {
+            $fields[] = [
+                $key,
+                $value,
+            ];
+        }
+        $this->table($this->headers, $fields);
     }
 }
