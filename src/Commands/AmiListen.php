@@ -59,7 +59,7 @@ class AmiListen extends AmiAbstract
     {
         parent::client($client);
         $this->info('starting listen ami');
-        if ($this->option('monitor')) {
+        if ($this->option('monitor') && $this->runningInConsole()) {
             $client->on('event', [$this, 'eventMonitor']);
         }
         $client->on('close', function () {
